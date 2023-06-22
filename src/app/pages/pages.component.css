@@ -1,0 +1,22 @@
+mat-toolbar {
+  background: #1F2348;
+  height: 110px;
+  color: #ffffff;
+}
+
+.nav-link:hover {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.contenidoPadron {
+  background: #1F2348;
+}
+
+.btnVerde {
+  background: #C9E265;
+  font-size: 21px;
+  color: #1F2348;
+  font-family: 'Jomolhari';
+  border: solid #C9E265;
+}

@@ -1,0 +1,34 @@
+.datosMpio {
+  height: 760px;
+  border-radius: 0px;
+  background-image: url("../../../assets/panelAzul.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.desplazar {
+  overflow-y: scroll;
+  height: 760px;
+}
+
+.btnMpio {
+  background: #C9E265;
+  font-size: 18px;
+  color: #1F2348;
+  font-family: 'Jomolhari';
+  border: solid #C9E265;
+  word-wrap: break-word;
+}
+
+.btnMpio:hover{
+  overflow: visible;
+}
+
+.btnNaranja {
+  background: #FE6B4B;
+  font-size: 20px;
+  color: #FFFFFF;
+  font-family: 'Jomolhari';
+  border: solid #FE6B4B;
+}

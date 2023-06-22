@@ -1,0 +1,28 @@
+<body>
+  <div class="container pt-5">
+    <div class="row">
+      <div class="col">
+        <mat-card class="tarjetaLogin">
+          <mat-card-header>
+            <img src="./assets/logo.png" class="imgLogin mt-5" alt="logoSIPRE">
+          </mat-card-header>
+          <mat-card-content>
+            <div class="col-12">
+              <form [formGroup]="loginForm" (ngSubmit)="capturaLogin()">
+                <div class="mb-5 mt-3">
+                  <input class="formLogin letras" type="text" formControlName="usuario" required placeholder="Usuario" />
+                </div>
+                <div class="mb-5 mt-5">
+                  <input class="formLogin letras" type="password" formControlName="passwd" required placeholder="Contraseña" />
+                </div>
+                <div class="mb-3 mt-3">
+                  <input class="mx-auto d-block btnLogin letras" type="submit" value="Enviar" />
+                </div>
+              </form>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</body>

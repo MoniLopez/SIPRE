@@ -1,0 +1,17 @@
+<mat-toolbar>
+  <img class="float-start mt-1 ms-5" style="width: 90px; height: 100px;" src="./assets/logo.png" />
+  <ul class="nav ms-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link letraBlanca" (click)="enviarVisible()">Inicio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link letraBlanca">Usuario</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link letraBlanca" routerLink="/login">Salir</a>
+    </li>
+  </ul>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+ 

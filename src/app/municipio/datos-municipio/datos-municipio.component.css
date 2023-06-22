@@ -1,0 +1,13 @@
+.btnTurquesa {
+    background: #5CE1E6;
+    font-size: 22px;
+    color: #1F2348;
+    width: 220px;
+    height: 40px;
+    font-family: 'Jomolhari';
+    border: solid #5CE1E6;
+  }
+
+  .contenidoMpio {
+    background: #1F2348;
+  }

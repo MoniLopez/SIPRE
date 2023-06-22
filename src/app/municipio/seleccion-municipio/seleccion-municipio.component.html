@@ -1,0 +1,19 @@
+<div class="container-fluid mt-5 col-11 datosMpio">
+  <div class="row">
+    <div class="col col-3 desplazar text-center" style="padding: 0px;">
+      <h1 class="letraVerde mt-4">MUNICIPIOS</h1>
+      <div class="btn-group-vertical col-10">
+        <button disabled class="btn btn-basic btnNaranja">EXPORTAR</button>
+        <button type="submit" class="btn btn-basic btnMpio mt-2" *ngFor="let municipio of municipios" (click)="seleccion(municipio);">{{municipio}}</button>
+      </div>
+    </div>
+    <div class="col">
+      <div *ngIf="visible == 1" class="row pt-5 text-center">
+        <p class="letraBlanca mt-5" style="font-size: 70px; line-height: 1;">Seleccione el municipio con el que desea comenzar a trabajar.</p>
+      </div>
+      <div *ngIf="visible == 2" class="row pt-5 text-center">
+        <app-datos-municipio [nombreMpio]="nombreMpio"></app-datos-municipio>
+      </div>
+    </div>
+  </div>
+</div>

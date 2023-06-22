@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+
+body {
+  min-height: 100vh;
+  background-image: url("assets/fondoColor.png");
+  height: 100%;
+  background-position: 0 center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.letraBlanca {
+  font-family: 'Jomolhari';
+  color: #ffffff;
+}
+
+.letraVerde {
+  font-family: 'Jomolhari';
+  color: #C9E265;
+}
+
+.letraMarino {
+  font-family: 'Jomolhari';
+  color: #1F2348;
+}
+
+.letraAmarilla {
+  font-family: 'Jomolhari';
+  color: #FFDE59;
+}
+
+.letraNaranja {
+  font-family: 'Jomolhari';
+  color: #FE6B4B;
+}
+
+.letraTurquesa {
+  font-family: 'Jomolhari';
+  color: #5CE1E6;
+}

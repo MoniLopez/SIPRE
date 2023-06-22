@@ -1,0 +1,137 @@
+<!-- RESPALDO-->
+<div class="container-fluid col-10">
+    <h1 class="letraVerde mt-5">{{municipio}}</h1>
+    <form [formGroup]="tasasIncrementosForm" (ngSubmit)="verificarDatos()">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p class="letraBlanca text-end" style="font-size: 18px; padding:0px;">Cuota Mínima: </p>
+                    </div>
+                    <div class="col">
+                        <input class="frmRegistro" formControlName="cuotaMinima" type="number" required />
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <p class="letraAmarilla text-end" style="font-size: 18px;">Status: </p>
+            </div>
+            <div class="col">
+                <p class="letraAmarilla text-start" style="font-size: 18px;">{{statusMpio}} </p>
+            </div>
+        </div>
+        <div class="row">
+            <p class="letraBlanca" style="font-size: 18px;">Rango permitido para incremento en el impuesto predial</p>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p class="letraBlanca text-end" style="font-size: 18px;">Mínimo: </p>
+                    </div>
+                    <div class="col">
+                        <input class="frmRegistro" type="number" formControlName="inicial" required />
+                    </div>
+                    <div class="col">
+                        <p class="letraBlanca text-start" style="font-size: 18px;">% </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p class="letraBlanca text-end" style="font-size: 18px;">Máximo: </p>
+                    </div>
+                    <div class="col">
+                        <input class="frmRegistro" type="number" formControlName="final" required />
+                    </div>
+                    <div class="col">
+                        <p class="letraBlanca text-start" style="font-size: 18px;">% </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <table class="table align-middle table-bordered contenidoMpio text-center">
+                <thead>
+                    <tr>
+                        <th colspan="12" class="letraNaranja" style="font-size: 18px;">TASAS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Urbano Construcción</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Baldío</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Rústco</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Suburbano</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Industrial</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Cantera</th>
+                    </tr>
+                    <tr>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                    </tr>
+                    <tr>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{urbanoT | number:'1.9-9'}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="urbanoCons"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{baldioT | number:'1.9-9'}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="urbanoBaldio"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{rusticoT | number:'1.9-9'}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="rustico"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{suburbanoT | number:'1.9-9'}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="suburbano"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{industrialT | number:'1.9-9'}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="industrial"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{canteraT | number:'1.9-9'}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="cantera"/></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <table class="table align-middle table-bordered contenidoMpio text-center">
+                <thead>
+                    <tr>
+                        <th colspan="6" class="letraNaranja" style="font-size: 18px;">INCREMENTOS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Urbano</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Rústco</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Construcciones</th>
+                    </tr>
+                    <tr>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                    </tr>
+                    <tr>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{urbanoI}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoUrbano"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{rusticoI}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoRustico"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{construccionesI}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoConstrucciones"/></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <button type="submit" class="col-3 btnTurquesa">Verificar</button>
+        </div>
+    </form>
+</div>
