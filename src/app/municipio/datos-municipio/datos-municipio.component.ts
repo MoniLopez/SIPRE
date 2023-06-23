@@ -48,6 +48,14 @@ export class DatosMunicipioComponent implements OnChanges{
   construccionesI='';
   statusMpio=''; //Almacena lo que regresa el servicio de status por municipio
   mensajeValuacion='';
+  visualizaPadron=0; //Para mostrar btnPadron
+  //Guarda valores devueltos para generar estadisticas después de valuar
+  objetoRustico: any;
+  objetoAuxRustico=[]
+  cadenaRustico='';
+  pruebaEsta='';
+
+
 
   obtenerDatosServicio()
   {
@@ -108,21 +116,33 @@ export class DatosMunicipioComponent implements OnChanges{
   });
 
   verificarDatos(){
-    if (this.tasasIncrementosForm.valid){ //Verificar que el formulario sea válido
+    console.log("Entra a verificarDatos");
+    /*if (this.tasasIncrementosForm.valid){ //Verificar que el formulario sea válido
       //Consume API para iniciar valuación
       this.service.valuarCuentas(this.tasasIncrementosForm.value).subscribe(data =>{
         this.objetoServicio=data;
         this.mensajeValuacion = this.objetoServicio.mensaje;
         console.log(this.mensajeValuacion);
         if (this.mensajeValuacion == "ok"){
-          //Abre modal
-          console.log("Entra a IF");
-          //this.modalService.show(EstadisticaComponent);
+          //Consume API para obtener estadistica
+          this.service.generaEstadistica(this.numMpio, 2023).subscribe(data2 =>{
+            this.objetoServicio = data2;
+            console.log(this.objetoServicio);
+            this.cadenaRustico=JSON.stringify(this.objetoServicio);
+            console.log(this.cadenaRustico);
+            this.objetoRustico=JSON.parse(this.cadenaRustico);
+            this.pruebaEsta=this.objetoRustico[0].diferencia;
+            console.log(this.pruebaEsta);
+          })
         }
       })
     }else{
       //this.toastr.error('Verifique su información', 'Datos incorrectos'); 
       this.toastr.warning('Todos los campos deben estar llenos con números positivos', 'Verificar informacion'); //Estructura: 'Mensaje','Título'
-    }
+    }*/
+  }
+
+  guardaTasasIncrementos(){
+    
   }
 }

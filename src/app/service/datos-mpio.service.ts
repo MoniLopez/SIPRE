@@ -11,6 +11,7 @@ export class DatosMpioService {
   regresaDatosAnterior ='http://192.168.1.147:5042/SimiUnicor/IniciaMunicipios/'
   obtenerStatusMpio='http://192.168.1.147:5042/SimiUnicor/StatusMunicipios/'
   limpiarValuar='http://192.168.1.147:5042/SimiUnicor/LmpCalcMunicipios/'
+  estadisticaMpio='http://192.168.1.147:5042/SimiUnicor/ReporteUno/'
   
   //Se usará en los componentes para mostrar o no el componente datos-municipio 
   private visibleServicio = new Subject<number>(); //Utiliza un Subject para enviar y recibir datos
@@ -32,5 +33,10 @@ export class DatosMpioService {
   //API para limpiar las cuentas que no serán valuadas y generar la valuación
   valuarCuentas (datosMpio:any){
     return this.http.post(this.limpiarValuar, datosMpio);
+  }
+
+  //API para obtener estadisticas de la valuación
+  generaEstadistica(mpio:string, anio:number){
+    return this.http.post(this.estadisticaMpio+mpio+'/'+anio, 1)
   }
 }
