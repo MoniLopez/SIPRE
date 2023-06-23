@@ -11,3 +11,22 @@
   .contenidoMpio {
     background: #1F2348;
   }
+
+  .estadisticas{
+    background: #F9EDD5;
+
+  }
+
+  .btnMarino{
+    background: #1F2348;
+    font-size: 22px;
+    width: 220px;
+    height: 40px;
+    font-family: 'Jomolhari';
+    border: solid #1F2348;
+  }
+
+  .btn-close{
+    color: #1F2348;
+  }
+

@@ -1,4 +1,4 @@
-<!-- RESPALDO-->
+<!-- Componente para tabla de tasas e intereses-->
 <div class="container-fluid col-10">
     <h1 class="letraVerde mt-5">{{municipio}}</h1>
     <form [formGroup]="tasasIncrementosForm" (ngSubmit)="verificarDatos()">
@@ -131,7 +131,83 @@
             </table>
         </div>
         <div class="row justify-content-center mt-3">
-            <button type="submit" class="col-3 btnTurquesa">Verificar</button>
+            <button type="submit" class="col-3 btnTurquesa" data-bs-toggle="modal" data-bs-target="#modalEstadisticas">Verificar</button>
         </div>
     </form>
 </div>
+
+<!-- Modal Estadisticas -->
+<div class="modal fade" id="modalEstadisticas" tabindex="-1" aria-labelledby="modalEstadisticas" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content estadisticas">
+        <div class="modal-header">
+          <h2 class="letraMarino" id="modalEstadisticasLabel">Se obtuvieron los siguientes resultados:</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--data-bs-dismiss="modal" cierra el modal-->
+        </div>
+        <div class="modal-body">
+          <table class="table align-middle table-bordered contenidoMpio text-center" style="border: #5CE1E6">
+            <thead>
+                <tr>
+                    <th class="letraAmarilla" style="font-size: 18px;">TIPO PREDIO</th>
+                    <th class="letraAmarilla" style="font-size: 18px;">TOTAL CUENTAS</th>
+                    <th class="letraAmarilla" style="font-size: 18px;">AÑO ANTERIOR</th>
+                    <th class="letraAmarilla" style="font-size: 18px;">AÑO ACTUAL</th>
+                    <th class="letraAmarilla" style="font-size: 18px;">DIFERENCIA</th>
+                    <th class="letraAmarilla" style="font-size: 18px;">PORCENTAJE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="letraBlanca" style="font-size: 18px;">RUSTICO</th>
+                    <th class="letraBlanca" style="font-size: 18px;">4348</th>
+                    <th class="letraBlanca" style="font-size: 18px;">$2079271.07</th>
+                    <th class="letraBlanca" style="font-size: 18px;">$2215787.86</th>
+                    <th class="letraBlanca" style="font-size: 18px;">$136516.79</th>
+                    <th class="letraBlanca" style="font-size: 18px;">7%</th>
+                </tr>
+                <tr>
+                  <th class="letraBlanca" style="font-size: 18px;">SUBURBANO</th>
+                  <th class="letraBlanca" style="font-size: 18px;">44</th>
+                  <th class="letraBlanca" style="font-size: 18px;">$122312.71</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{pruebaEsta}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">$8529.56</th>
+                  <th class="letraBlanca" style="font-size: 18px;">7%</th>
+                </tr>
+                <tr>
+                  <th class="letraBlanca" style="font-size: 18px;">URBANO</th>
+                  <th class="letraBlanca" style="font-size: 18px;">11029</th>
+                  <th class="letraBlanca" style="font-size: 18px;">$3273225.10</th>
+                  <th class="letraBlanca" style="font-size: 18px;">$130842.27</th>
+                  <th class="letraBlanca" style="font-size: 18px;">$225588.63</th>
+                  <th class="letraBlanca" style="font-size: 18px;">7%</th>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btnMarino" style="color:#5CE1E6">Revaluar</button>
+          <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-toggle="modal" data-bs-target="#modalGuardar">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Guardar-->
+
+<div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="modalGuardar" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content estadisticas">
+        <div class="modal-header">
+          <h2 class="letraMarino" id="modalEstadisticasLabel">Guardar</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--data-bs-dismiss="modal" cierra el modal-->
+        </div>
+        <div class="modal-body">
+            <h1 class="letraMarino" style="size: 20px;">Al seleccionar <b>Guardar</b> está indicando que los valores asignados son correctos y con ello se podrá generar el padrón factura. ¿Desea continuar?</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btnMarino" style="color:#5CE1E6" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btnMarino" style="color:#C9E265">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
