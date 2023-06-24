@@ -51,9 +51,24 @@ export class DatosMunicipioComponent implements OnChanges{
   visualizaPadron=0; //Para mostrar btnPadron
   //Guarda valores devueltos para generar estadisticas después de valuar
   objetoRustico: any;
-  objetoAuxRustico=[]
   cadenaRustico='';
-  pruebaEsta='';
+  totalCuentasRus='';
+  anioAnteriorRus='';
+  anioActualRus='';
+  diferenciaRus='';
+  porcentajeRus='';
+
+  totalCuentasSub='';
+  anioAnteriorSub='';
+  anioActualSub='';
+  diferenciaSub='';
+  porcentajeSub='';
+
+  totalCuentasUrb='';
+  anioAnteriorUrb='';
+  anioActualUrb='';
+  diferenciaUrb='';
+  porcentajeUrb='';
 
 
 
@@ -117,7 +132,7 @@ export class DatosMunicipioComponent implements OnChanges{
 
   verificarDatos(){
     console.log("Entra a verificarDatos");
-    /*if (this.tasasIncrementosForm.valid){ //Verificar que el formulario sea válido
+    if (this.tasasIncrementosForm.valid){ //Verificar que el formulario sea válido
       //Consume API para iniciar valuación
       this.service.valuarCuentas(this.tasasIncrementosForm.value).subscribe(data =>{
         this.objetoServicio=data;
@@ -131,15 +146,30 @@ export class DatosMunicipioComponent implements OnChanges{
             this.cadenaRustico=JSON.stringify(this.objetoServicio);
             console.log(this.cadenaRustico);
             this.objetoRustico=JSON.parse(this.cadenaRustico);
-            this.pruebaEsta=this.objetoRustico[0].diferencia;
-            console.log(this.pruebaEsta);
+            this.totalCuentasRus=this.objetoRustico[0].totalCuentas;
+            this.anioAnteriorRus=this.objetoRustico[0].impuestoActual;
+            this.anioActualRus=this.objetoRustico[0].impuestoCalculado;
+            this.diferenciaRus=this.objetoRustico[0].diferencia;
+            this.porcentajeRus=this.objetoRustico[0].porcentaje;
+
+            this.totalCuentasSub=this.objetoRustico[1].totalCuentas;
+            this.anioAnteriorSub=this.objetoRustico[1].impuestoActual;
+            this.anioActualSub=this.objetoRustico[1].impuestoCalculado;
+            this.diferenciaSub=this.objetoRustico[1].diferencia;
+            this.porcentajeSub=this.objetoRustico[1].porcentaje;
+
+            this.totalCuentasUrb=this.objetoRustico[2].totalCuentas;
+            this.anioAnteriorUrb=this.objetoRustico[2].impuestoActual;
+            this.anioActualUrb=this.objetoRustico[2].impuestoCalculado;
+            this.diferenciaUrb=this.objetoRustico[2].diferencia;
+            this.porcentajeUrb=this.objetoRustico[2].porcentaje;
           })
         }
       })
     }else{
       //this.toastr.error('Verifique su información', 'Datos incorrectos'); 
       this.toastr.warning('Todos los campos deben estar llenos con números positivos', 'Verificar informacion'); //Estructura: 'Mensaje','Título'
-    }*/
+    }
   }
 
   guardaTasasIncrementos(){
