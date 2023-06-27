@@ -185,7 +185,7 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btnMarino" style="color:#5CE1E6">Revaluar</button>
+          <button type="button" class="btnMarino" style="color:#5CE1E6" data-bs-dismiss="modal">Revaluar</button>
           <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-toggle="modal" data-bs-target="#modalGuardar">Guardar</button>
         </div>
       </div>
@@ -193,7 +193,6 @@
   </div>
 
 <!-- Modal Guardar-->
-
 <div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="modalGuardar" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content estadisticas">
@@ -206,7 +205,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btnMarino" style="color:#5CE1E6" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btnMarino" style="color:#C9E265">Continuar</button>
+          <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-dismiss="modal" (click)="guardaTasasIncrementos()">Continuar</button>
         </div>
       </div>
     </div>

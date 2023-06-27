@@ -6,12 +6,14 @@ import { DatosMunicipioComponent } from './datos-municipio/datos-municipio.compo
 import { ReactiveFormsModule } from '@angular/forms'; //Permite usar fromGroup
 
 import { MatCardModule } from '@angular/material/card';
+import { PadronPredialComponent } from './padron-predial/padron-predial.component';
 
 
 @NgModule({
   declarations: [
     SeleccionMunicipioComponent,
-    DatosMunicipioComponent
+    DatosMunicipioComponent,
+    PadronPredialComponent
   ],
   imports: [
     CommonModule,

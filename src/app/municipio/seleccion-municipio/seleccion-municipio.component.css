@@ -22,7 +22,11 @@
 }
 
 .btnMpio:hover{
-  overflow: visible;
+  cursor: pointer;
+  color: #FFFFFF;
+  background: #593677;
+  font-weight: bold;
+  border: solid #593677;
 }
 
 .btnNaranja {

@@ -13,5 +13,6 @@ export class PagesComponent {
   enviarVisible(){
     const visible = 1;
     this.service.enviarVisible(visible);
+    this.router.navigate(['dashboard/municipios/selecMpio']); //Regresa al inicio
   }
 }

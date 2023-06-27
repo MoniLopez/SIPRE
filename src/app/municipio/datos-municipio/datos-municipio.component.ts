@@ -1,7 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama servicio que contiene los datos de tasas e incrementos
+import { Router } from '@angular/router'; //Redigir a otras vistas
 
 
 @Component({
@@ -11,7 +12,7 @@ import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama ser
 })
 
 export class DatosMunicipioComponent implements OnChanges{
-  constructor(private builder: FormBuilder, private toastr: ToastrService, private service: DatosMpioService){
+  constructor(private builder: FormBuilder, private toastr: ToastrService, private service: DatosMpioService, private router: Router){
   }
 
   //Recibe datos provenientes del componente seleccion-municipio
@@ -57,19 +58,24 @@ export class DatosMunicipioComponent implements OnChanges{
   anioActualRus='';
   diferenciaRus='';
   porcentajeRus='';
-
   totalCuentasSub='';
   anioAnteriorSub='';
   anioActualSub='';
   diferenciaSub='';
   porcentajeSub='';
-
   totalCuentasUrb='';
   anioAnteriorUrb='';
   anioActualUrb='';
   diferenciaUrb='';
   porcentajeUrb='';
 
+  //Almacena datos propuestos
+  objetoAuxDatos=[];
+  cadenaDatos='';
+  objetoDatos:any;
+  cuotaMinima='';
+  rangoMax='';
+  rangoMin='';
 
 
   obtenerDatosServicio()
@@ -105,7 +111,64 @@ export class DatosMunicipioComponent implements OnChanges{
     this.service.verificaStatus(this.numMpio, 2023).subscribe(data1 => {
       this.objetoServicio = data1;
       this.statusMpio = this.objetoServicio[0].toUpperCase();
+      //Si el status está en proceso muestra los datos que previamente se ingresaron
+      if (this.statusMpio == 'PROCESO'){
+        console.log(this.statusMpio);
+        this.service.obtenDatos(this.numMpio, 2024).subscribe(data2=>{
+          this.objetoServicio = data2; //almacena los objetos que regresa el servicio obtenDatos
+          this.objetoAuxTasas = this.objetoServicio.Table; //Guarda unicamente los objetos que pertenecen a Table(tasas)
+          this.cadenaTasas = JSON.stringify(this.objetoAuxTasas); //Convierte en cadena los objetos
+          this.objetoTasas = JSON.parse(this.cadenaTasas); //Converte la cadena en un objeto tipo JSON para poder usar sus indices (posición)
+          //Obtiene datos de tasas propuestass
+          this.urbanoT = this.objetoTasas[0].urbano;
+          this.baldioT = this.objetoTasas[0].baldio;
+          this.rusticoT = this.objetoTasas[0].rustico;
+          this.suburbanoT = this.objetoTasas[0].suburbano;
+          this.industrialT = this.objetoTasas[0].industrial;
+          this.canteraT = this.objetoTasas[0].cantera;
+          //Obtener datos de Incrementos Propuestos
+          this.objetoAuxIncrementos = this.objetoServicio.Table1;
+          this.cadenaIncrementos = JSON.stringify(this.objetoAuxIncrementos);
+          this.objetoIncrementos = JSON.parse(this.cadenaIncrementos);
+          this.urbanoI = this.objetoIncrementos[0].IncrementoUrbano;
+          this.rusticoI = this.objetoIncrementos[0].IncrementoRústico;
+          this.construccionesI = this.objetoIncrementos[0].IncrementoConstrucciones;
+          //Obtiene datos de Cuotas Propuestas
+          this.objetoAuxDatos = this.objetoServicio.Table2;
+          this.cadenaDatos = JSON.stringify(this.objetoAuxDatos);
+          this.objetoDatos = JSON.parse(this.cadenaDatos); 
+          this.cuotaMinima = this.objetoDatos[0].CuotaMinima;
+          this.rangoMax = this.objetoDatos[0].rangoFinal;
+          this.rangoMin = this.objetoDatos[0].rangoInicial;
+          //Asigna los valores al input de las tablas
+          this.tasasIncrementosForm.get('cuotaMinima')?.setValue(this.cuotaMinima);
+          this.tasasIncrementosForm.get('inicial')?.setValue(this.rangoMin);
+          this.tasasIncrementosForm.get('final')?.setValue(this.rangoMax);
+          this.tasasIncrementosForm.get('urbanoCons')?.setValue(this.urbanoT);
+          this.tasasIncrementosForm.get('urbanoBaldio')?.setValue(this.baldioT);
+          this.tasasIncrementosForm.get('rustico')?.setValue(this.rusticoT);
+          this.tasasIncrementosForm.get('suburbano')?.setValue(this.suburbanoT);
+          this.tasasIncrementosForm.get('incrementoUrbano')?.setValue(this.urbanoI);
+          this.tasasIncrementosForm.get('incrementoRustico')?.setValue(this.rusticoI);
+          this.tasasIncrementosForm.get('incrementoConstrucciones')?.setValue(this.construccionesI);
+        })
+      }
+      if (this.statusMpio == 'INICIAL'){
+        this.tasasIncrementosForm.get('cuotaMinima')?.setValue('');
+        this.tasasIncrementosForm.get('inicial')?.setValue('');
+        this.tasasIncrementosForm.get('final')?.setValue('');
+        this.tasasIncrementosForm.get('urbanoCons')?.setValue('');
+        this.tasasIncrementosForm.get('urbanoBaldio')?.setValue('');
+        this.tasasIncrementosForm.get('rustico')?.setValue('');
+        this.tasasIncrementosForm.get('suburbano')?.setValue('');
+        this.tasasIncrementosForm.get('incrementoUrbano')?.setValue('');
+        this.tasasIncrementosForm.get('incrementoRustico')?.setValue('');
+        this.tasasIncrementosForm.get('incrementoConstrucciones')?.setValue('');
+      }
     })
+
+    
+    
   }
 
   //Valida los campos del formulario tasas e incrementos
@@ -131,8 +194,7 @@ export class DatosMunicipioComponent implements OnChanges{
   });
 
   verificarDatos(){
-    console.log("Entra a verificarDatos");
-    if (this.tasasIncrementosForm.valid){ //Verificar que el formulario sea válido
+    /*if (this.tasasIncrementosForm.valid){ //Verificar que el formulario sea válido
       //Consume API para iniciar valuación
       this.service.valuarCuentas(this.tasasIncrementosForm.value).subscribe(data =>{
         this.objetoServicio=data;
@@ -169,10 +231,10 @@ export class DatosMunicipioComponent implements OnChanges{
     }else{
       //this.toastr.error('Verifique su información', 'Datos incorrectos'); 
       this.toastr.warning('Todos los campos deben estar llenos con números positivos', 'Verificar informacion'); //Estructura: 'Mensaje','Título'
-    }
+    }*/
   }
 
   guardaTasasIncrementos(){
-    
+    this.router.navigate(['dashboard/municipios/padronPredial']); //Mueve a la pagina que indica el router
   }
 }
