@@ -82,17 +82,17 @@
                         <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
                     </tr>
                     <tr>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{urbanoT | number:'1.9-9'}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objTasas?.urbano | number:'1.9-9'}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="urbanoCons"/></th>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{baldioT | number:'1.9-9'}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objTasas?.baldio | number:'1.9-9'}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="urbanoBaldio"/></th>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{rusticoT | number:'1.9-9'}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objTasas?.rustico | number:'1.9-9'}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="rustico"/></th>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{suburbanoT | number:'1.9-9'}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objTasas?.suburbano | number:'1.9-9'}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="suburbano"/></th>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{industrialT | number:'1.9-9'}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objTasas?.industrial | number:'1.9-9'}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="industrial"/></th>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{canteraT | number:'1.9-9'}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objTasas?.cantera | number:'1.9-9'}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="cantera"/></th>
                     </tr>
                 </tbody>
@@ -102,14 +102,16 @@
             <table class="table align-middle table-bordered contenidoMpio text-center">
                 <thead>
                     <tr>
-                        <th colspan="6" class="letraNaranja" style="font-size: 18px;">INCREMENTOS</th>
+                        <th colspan="10" class="letraNaranja" style="font-size: 18px;">INCREMENTOS</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Urbano</th>
-                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Rústco</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Rústico</th>
                         <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Construcciones</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Industrial</th>
+                        <th colspan="2" class="letraTurquesa" style="font-size: 18px;">Cantera</th>
                     </tr>
                     <tr>
                         <th class="letraBlanca" style="font-size: 18px;">Actual</th>
@@ -118,15 +120,24 @@
                         <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
                         <th class="letraBlanca" style="font-size: 18px;">Actual</th>
                         <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Actual</th>
+                        <th class="letraBlanca" style="font-size: 18px;">Propuesto</th>
                     </tr>
                     <tr>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{urbanoI}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objIncrementos?.IncrementoUrbano}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoUrbano"/></th>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{rusticoI}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objIncrementos?.IncrementoRustico}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoRustico"/></th>
-                        <th class="letraAmarilla" style="font-size: 18px;">{{construccionesI}}</th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objIncrementos?.IncrementoConstrucciones}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoConstrucciones"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objIncrementos?.IncrementoIndustrial}}</th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoConstrucciones"/></th>
+                        <th class="letraAmarilla" style="font-size: 18px;">{{objIncrementos?.IncrementoCantera}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoConstrucciones"/></th>
                     </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -159,27 +170,27 @@
             <tbody>
                 <tr>
                     <th class="letraBlanca" style="font-size: 18px;">RUSTICO</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{totalCuentasRus}}</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{anioAnteriorRus}}</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{anioActualRus}}</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{diferenciaRus | number:'1.9-9'}}</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{porcentajeRus | number:'1.9-9'}}</th>
+                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.totalCuentas}}</th>
+                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.impuestoActual}}</th>
+                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.impuestoCalculado}}</th>
+                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.diferencia | number:'1.9-9'}}</th>
+                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.porcentaje | number:'1.9-9'}}</th>
                 </tr>
                 <tr>
                   <th class="letraBlanca" style="font-size: 18px;">SUBURBANO</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{totalCuentasSub}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{anioAnteriorSub}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{anioActualSub}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{diferenciaSub | number:'1.9-9'}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{porcentajeSub | number:'1.9-9'}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.totalCuentas}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.impuestoActual}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.impuestoCalculado}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.diferencia | number:'1.9-9'}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.porcenjate | number:'1.9-9'}}</th>
                 </tr>
                 <tr>
                   <th class="letraBlanca" style="font-size: 18px;">URBANO</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{totalCuentasUrb}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{anioAnteriorUrb}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{anioActualUrb}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{diferenciaUrb | number:'1.9-9'}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{porcentajeUrb | number:'1.9-9'}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.totalCuentas}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.impuestoActual}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.impuestoCalculado}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.diferencia | number:'1.9-9'}}</th>
+                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.porcentaje | number:'1.9-9'}}</th>
                 </tr>
             </tbody>
           </table>
