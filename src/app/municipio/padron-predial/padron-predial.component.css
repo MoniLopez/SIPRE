@@ -1,0 +1,26 @@
+.contenido {
+    background: #1F2348;
+}
+
+.btnVerde{
+    background: #03989E;
+    font-size: 22px;
+    color: #FFFFFF;
+    font-family: 'Jomolhari';
+    border: solid #03989E;
+    word-wrap: break-word;
+    width: 100px;
+    height: 40px;
+}
+
+.btnVerde:hover{
+    cursor: pointer;
+    color: #1F2348;
+    background: #C9E265;
+    font-weight: bold;
+    border: solid #C9E265;
+}
+.page-link:hover {
+    font-weight: bold;
+    color: #FE6B4B;;
+}
