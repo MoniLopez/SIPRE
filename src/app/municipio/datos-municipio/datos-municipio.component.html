@@ -133,75 +133,20 @@
                         <th class="letraAmarilla" style="font-size: 18px;">{{objIncrementos?.IncrementoConstrucciones}}</th>
                         <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoConstrucciones"/></th>
                         <th class="letraAmarilla" style="font-size: 18px;">{{objIncrementos?.IncrementoIndustrial}}</th>
-                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoConstrucciones"/></th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoIndustrial"/></th>
                         <th class="letraAmarilla" style="font-size: 18px;">{{objIncrementos?.IncrementoCantera}}</th>
-                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoConstrucciones"/></th>
+                        <th style="font-size: 18px;"><input type="number" style="width:80px;" formControlName="incrementoCantera"/></th>
                     </tr>
                     
                 </tbody>
             </table>
         </div>
         <div class="row justify-content-center mt-3">
-            <button type="submit" class="col-3 btnTurquesa" data-bs-toggle="modal" data-bs-target="#modalEstadisticas">Verificar</button>
+            <button type="submit" class="col-3 btnTurquesa">Verificar</button>
+            <!-- <button type="submit" class="col-3 btnTurquesa" data-bs-toggle="modal" data-bs-target="#modalEstadisticas">Verificar</button>-->
         </div>
     </form>
 </div>
-
-<!-- Modal Estadisticas -->
-<div class="modal fade" id="modalEstadisticas" tabindex="-1" aria-labelledby="modalEstadisticas" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-      <div class="modal-content estadisticas">
-        <div class="modal-header">
-          <h2 class="letraMarino" id="modalEstadisticasLabel">Se obtuvieron los siguientes resultados:</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--data-bs-dismiss="modal" cierra el modal-->
-        </div>
-        <div class="modal-body">
-          <table class="table align-middle table-bordered contenidoMpio text-center" style="border: #5CE1E6">
-            <thead>
-                <tr>
-                    <th class="letraAmarilla" style="font-size: 18px;">TIPO PREDIO</th>
-                    <th class="letraAmarilla" style="font-size: 18px;">TOTAL CUENTAS</th>
-                    <th class="letraAmarilla" style="font-size: 18px;">AÑO ANTERIOR</th>
-                    <th class="letraAmarilla" style="font-size: 18px;">AÑO ACTUAL</th>
-                    <th class="letraAmarilla" style="font-size: 18px;">DIFERENCIA</th>
-                    <th class="letraAmarilla" style="font-size: 18px;">PORCENTAJE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th class="letraBlanca" style="font-size: 18px;">RUSTICO</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.totalCuentas}}</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.impuestoActual}}</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.impuestoCalculado}}</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.diferencia | number:'1.9-9'}}</th>
-                    <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.porcentaje | number:'1.9-9'}}</th>
-                </tr>
-                <tr>
-                  <th class="letraBlanca" style="font-size: 18px;">SUBURBANO</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.totalCuentas}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.impuestoActual}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.impuestoCalculado}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.diferencia | number:'1.9-9'}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.porcenjate | number:'1.9-9'}}</th>
-                </tr>
-                <tr>
-                  <th class="letraBlanca" style="font-size: 18px;">URBANO</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.totalCuentas}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.impuestoActual}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.impuestoCalculado}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.diferencia | number:'1.9-9'}}</th>
-                  <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.porcentaje | number:'1.9-9'}}</th>
-                </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btnMarino" style="color:#5CE1E6" data-bs-dismiss="modal">Revaluar</button>
-          <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-toggle="modal" data-bs-target="#modalGuardar">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
 <!-- Modal Guardar-->
 <div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="modalGuardar" aria-hidden="true">
@@ -216,7 +161,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btnMarino" style="color:#5CE1E6" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-dismiss="modal" (click)="guardaTasasIncrementos()">Continuar</button>
+          <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-dismiss="modal">Continuar</button>
         </div>
       </div>
     </div>

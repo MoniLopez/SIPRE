@@ -10,9 +10,9 @@ import { DatosMpioService } from '../service/datos-mpio.service'; //Servicio par
 export class PagesComponent {
   constructor(private router: Router, private service: DatosMpioService) { }
  
-  enviarVisible(){
+  enviarVisible(){ //Envía valor para poder mostrar el componente de inicio
     const visible = 1;
-    this.service.enviarVisible(visible);
+    this.service.enviarVisible(visible); //Mediante el servio envía los datos
     this.router.navigate(['dashboard/municipios/selecMpio']); //Regresa al inicio
   }
 }
