@@ -1,0 +1,62 @@
+<div class="container-fluid col-12">
+    <h1 class="letraBlanca mt-5">En el municipio <strong>{{municipio}}</strong> se obtuvieron los siguientes resultados:</h1>
+    <table class="table align-middle table-bordered contenidoMpio text-center mt-5" style="border: #5CE1E6">
+        <thead>
+            <tr>
+                <th class="letraAmarilla" style="font-size: 18px;">TIPO PREDIO</th>
+                <th class="letraAmarilla" style="font-size: 18px;">TOTAL CUENTAS</th>
+                <th class="letraAmarilla" style="font-size: 18px;">AÑO ANTERIOR</th>
+                <th class="letraAmarilla" style="font-size: 18px;">AÑO ACTUAL</th>
+                <th class="letraAmarilla" style="font-size: 18px;">DIFERENCIA</th>
+                <th class="letraAmarilla" style="font-size: 18px;">PORCENTAJE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="letraBlanca" style="font-size: 18px;">RUSTICO</th>
+                <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.totalCuentas}}</th>
+                <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.impuestoActual}}</th>
+                <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.impuestoCalculado}}</th>
+                <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.diferencia | number:'1.9-9'}}</th>
+                <th class="letraBlanca" style="font-size: 18px;">{{objRustico?.porcentaje | number:'1.9-9'}}</th>
+            </tr>
+            <tr>
+              <th class="letraBlanca" style="font-size: 18px;">SUBURBANO</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.totalCuentas}}</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.impuestoActual}}</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.impuestoCalculado}}</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.diferencia | number:'1.9-9'}}</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objSuburbano?.porcentaje | number:'1.9-9'}}</th>
+            </tr>
+            <tr>
+              <th class="letraBlanca" style="font-size: 18px;">URBANO</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.totalCuentas}}</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.impuestoActual}}</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.impuestoCalculado}}</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.diferencia | number:'1.9-9'}}</th>
+              <th class="letraBlanca" style="font-size: 18px;">{{objUrbano?.porcentaje | number:'1.9-9'}}</th>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btnMarino mb-5" style="color:#5CE1E6" (click)="regresaValuacion()">Revaluar</button>
+    <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-toggle="modal" data-bs-target="#modalGuardar">Guardar</button>
+</div>
+
+<!-- Modal Guardar-->
+<div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="modalGuardar" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content estadisticas">
+        <div class="modal-header">
+          <h2 class="letraMarino" id="modalEstadisticasLabel">Guardar</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--data-bs-dismiss="modal" cierra el modal-->
+        </div>
+        <div class="modal-body">
+            <h1 class="letraMarino" style="size: 20px;">Al seleccionar <b>Guardar</b> está indicando que los valores asignados son correctos y con ello se podrá generar el padrón factura. ¿Desea continuar?</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btnMarino" style="color:#5CE1E6" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-dismiss="modal" (click)="guardaTasasIncrementos()">Continuar</button>
+        </div>
+      </div>
+    </div>
+</div>

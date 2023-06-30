@@ -7,13 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms'; //Permite usar fromGroup
 
 import { MatCardModule } from '@angular/material/card';
 import { PadronPredialComponent } from './padron-predial/padron-predial.component';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 
 
 @NgModule({
   declarations: [
     SeleccionMunicipioComponent,
     DatosMunicipioComponent,
-    PadronPredialComponent
+    PadronPredialComponent,
+    EstadisticasComponent
   ],
   imports: [
     CommonModule,
