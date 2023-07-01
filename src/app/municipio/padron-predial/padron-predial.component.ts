@@ -17,9 +17,23 @@ export class PadronPredialComponent {
   
   elementosPorPagina = 16;
   paginaActual = 1;
+  numeroTotalPaginas=0;
 
   siguientePagina(){
     this.paginaActual++;
+  }
+
+  anteriorPagina(){
+    this.paginaActual--;
+  }
+
+  primeraPagina(){
+    this.paginaActual = 1;
+  }
+
+  ultimaPagina(){
+    this.numeroTotalPaginas = Math.ceil(this.cuentas.length / this.elementosPorPagina);
+    this.paginaActual = this.numeroTotalPaginas;
   }
   
   obtenerDatos(){
@@ -28,6 +42,7 @@ export class PadronPredialComponent {
       this.cuentas = padronData;
     });
   }
+
 
   
 }
