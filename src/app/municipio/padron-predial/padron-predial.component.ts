@@ -15,11 +15,20 @@ export class PadronPredialComponent {
 
   cuentas: Cuentas[] = [];
   
+  elementosPorPagina = 16;
+  paginaActual = 1;
+
+  siguientePagina(){
+    this.paginaActual++;
+  }
+  
   obtenerDatos(){
     this.service.valuacionMunicipio('1',2024).subscribe((data: Object )=>{
       const padronData = data as Cuentas [];
       this.cuentas = padronData;
     });
   }
+
+  
 }
 
