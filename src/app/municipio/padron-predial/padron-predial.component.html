@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let cuenta of cuentas">
+            <tr *ngFor="let cuenta of cuentas | slice: (paginaActual-1) * elementosPorPagina : paginaActual * elementosPorPagina">
                 <td class="letraAmarilla" style="font-size: 18px;">{{cuenta.noControl}}</td>
                 <td class="letraAmarilla" style="font-size: 18px;">{{cuenta.NoMpio}}</td>
                 <td class="letraAmarilla" style="font-size: 18px;">{{cuenta.NoCuenta}}</td>
@@ -57,4 +57,22 @@
             </tr>
         </tbody>
     </table>
+</div>
+<div>
+    <nav aria-label="Paginación">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="paginaActual === 1">
+            <a class="page-link" (click)="paginaActual = 1">Primera</a>
+          </li>
+          <li class="page-item" [class.disabled]="paginaActual === 1">
+            <a class="page-link" (click)="paginaActual = paginaActual - 1">Anterior</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="paginaActual = paginaActual + 1">Siguiente</a>
+          </li>
+        </ul>
+    </nav>
+    <div>
+        <button type="submit" class="btnVerde" style="float: right;">Aceptar</button>
+    </div>
 </div>
