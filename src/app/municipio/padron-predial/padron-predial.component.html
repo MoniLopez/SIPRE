@@ -60,15 +60,18 @@
 </div>
 <div>
     <nav aria-label="Paginación">
-        <ul class="pagination">
+        <ul class="pagination justify-content-center">
           <li class="page-item" [class.disabled]="paginaActual === 1">
-            <a class="page-link" (click)="paginaActual = 1">Primera</a>
+            <a class="page-link contenido letraVerde" (click)="paginaActual = 1">Primera</a>
           </li>
           <li class="page-item" [class.disabled]="paginaActual === 1">
-            <a class="page-link" (click)="paginaActual = paginaActual - 1">Anterior</a>
+            <a class="page-link contenido letraVerde" (click)="anteriorPagina()">Anterior</a>
           </li>
           <li class="page-item">
-            <a class="page-link" (click)="paginaActual = paginaActual + 1">Siguiente</a>
+            <a class="page-link contenido letraVerde" (click)="siguientePagina()">Siguiente</a>
+          </li>
+          <li class="page-item" *ngIf="paginaActual !== numeroTotalPaginas">
+            <a class="page-link contenido letraVerde" (click)="ultimaPagina()">Última</a>
           </li>
         </ul>
     </nav>
