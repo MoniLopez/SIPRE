@@ -3,7 +3,7 @@
     <div class="col col-3 desplazar text-center" style="padding: 0px;">
       <h1 class="letraVerde mt-4">MUNICIPIOS</h1>
       <div class="btn-group-vertical col-10">
-        <button disabled class="btn btn-basic btnNaranja">EXPORTAR</button>
+        <button  class="btn btn-basic btnNaranja" [class.disabled]="exportar === 0">EXPORTAR</button>
         <button type="submit" class="btn btn-basic btnMpio mt-2" *ngFor="let municipio of municipios" (click)="seleccion(municipio);">{{municipio}}</button>
       </div>
     </div>

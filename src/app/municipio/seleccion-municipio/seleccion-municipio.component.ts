@@ -17,10 +17,19 @@ export class SeleccionMunicipioComponent {
   }
 
   visible:number=0;
+  exportar:number=0;
+
   ngOnInit(){
     this.service2.visible$.subscribe((valor)=>{
       this.visible = valor; //Captura el valor recibido en la suscripción
     })
+
+    this.service2.exportar$.subscribe((valor1)=>{
+      this.exportar = valor1; //Captura valor recibido
+    })
+    this.exportar=1;
+    console.log("Exportar desde seleccionMunicipio");
+    console.log(this.exportar);
   }
 
   mpios:any; // variable para guardar lo que se recibe en la api

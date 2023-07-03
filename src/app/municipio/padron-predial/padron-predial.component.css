@@ -2,18 +2,19 @@
     background: #1F2348;
 }
 
-.btnVerde{
-    background: #03989E;
+.btnMarino{
+    background: #1F2348;
     font-size: 22px;
-    color: #FFFFFF;
+    color: #C9E265;
     font-family: 'Jomolhari';
-    border: solid #03989E;
+    border: solid #1F2348;
     word-wrap: break-word;
     width: 100px;
     height: 40px;
+    margin: 50px;
 }
 
-.btnVerde:hover{
+.btnMarino:hover{
     cursor: pointer;
     color: #1F2348;
     background: #C9E265;

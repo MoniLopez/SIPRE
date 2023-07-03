@@ -10,37 +10,91 @@ import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama ser
 })
 export class PadronPredialComponent {
   constructor(private router: Router, private service: DatosMpioService){
-    this.obtenerDatos();
   }
 
   cuentas: Cuentas[] = [];
   
-  elementosPorPagina = 16;
+  elementosPorPagina = 17;
   paginaActual = 1;
-  numeroTotalPaginas=0;
+  numeroTotalPaginas = 0;
+  paginasMostradas = 10; // Número de páginas mostradas en la paginación
+  paginas: number[] = []; // Almacena las páginas mostradas en la paginación
 
-  siguientePagina(){
-    this.paginaActual++;
+  ngOnInit(){
+    this.obtenerDatos();
   }
 
-  anteriorPagina(){
-    this.paginaActual--;
-  }
-
-  primeraPagina(){
-    this.paginaActual = 1;
-  }
-
-  ultimaPagina(){
-    this.numeroTotalPaginas = Math.ceil(this.cuentas.length / this.elementosPorPagina);
-    this.paginaActual = this.numeroTotalPaginas;
-  }
-  
+  //Recibe los datos de las cuentas valuadas del municipio
   obtenerDatos(){
     this.service.valuacionMunicipio('1',2024).subscribe((data: Object )=>{
       const padronData = data as Cuentas [];
       this.cuentas = padronData;
+      this.actualizarPaginasMostradas();
     });
+    
+  }
+ 
+  //***Funciones para mostrar paginación adecuada***
+
+  calcularNumeroTotalPaginas(): number {
+    return Math.ceil(this.cuentas.length / this.elementosPorPagina);
+  }
+
+  actualizarPaginasMostradas() { //Permite que se muestre un rango de páginas en la paginación
+    this.numeroTotalPaginas = this.calcularNumeroTotalPaginas();
+    let inicio = this.paginaActual - Math.floor(this.paginasMostradas / 2);
+    if (inicio < 1) {
+      inicio = 1;
+    }
+
+    let fin = inicio + this.paginasMostradas - 1;
+    if (fin > this.numeroTotalPaginas) {
+      fin = this.numeroTotalPaginas;
+      inicio = fin - this.paginasMostradas + 1;
+      if (inicio < 1) {
+        inicio = 1;
+      }
+    }
+
+    this.paginas = Array.from({ length: fin - inicio + 1 }, (_, index) => inicio + index);
+  }
+
+  siguientePagina(){
+    if (this.paginaActual < this.calcularNumeroTotalPaginas())
+    {
+      this.paginaActual++;
+      this.actualizarPaginasMostradas();
+    }
+  }
+
+  anteriorPagina(){
+    if (this.paginaActual > 1) {
+      this.paginaActual--;
+      this.actualizarPaginasMostradas();
+    }
+  }
+
+  primeraPagina(){
+    this.paginaActual = 1;
+    this.actualizarPaginasMostradas();
+  }
+
+  ultimaPagina() {
+    this.paginaActual = this.calcularNumeroTotalPaginas();
+    this.actualizarPaginasMostradas();
+  }
+  
+  
+  
+  exportar:number=0;
+
+  
+
+  //Revisar guardar valor en base de datos
+  enviarExportar(){ //Envía valor para poder habilitar el boton Exportar
+    this.exportar = this.exportar+1;
+    this.service.enviarExportar(this.exportar); //Mediante el servio envía los datos
+    console.log(this.exportar);
   }
 
 

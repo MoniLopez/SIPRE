@@ -22,6 +22,13 @@ export class DatosMpioService {
     this.visibleServicio.next(visible); //Envía el valor a través del Subject
   }
 
+   //Se usará para habiliar el boton Exportar una vez finalizada la valuación de todos los municipios
+   private exportarServicio = new Subject<number>(); //Utiliza un Subject para enviar y recibir datos
+   exportar$ = this.exportarServicio.asObservable(); //Expone un observable para suscribirse al valor
+   enviarExportar(exportar: number){
+     this.exportarServicio.next(exportar); //Envía el valor a través del Subject
+   }
+
   //API que devuelve info. de tasas e incrementos del ejercicio anterior
   obtenDatos (mpio: string, anio: number){
     return this.http.post(this.regresaDatosAnterior+mpio+'/'+anio, 1);
