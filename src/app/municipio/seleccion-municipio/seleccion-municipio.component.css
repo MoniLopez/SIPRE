@@ -36,3 +36,34 @@
   font-family: 'Jomolhari';
   border: solid #FE6B4B;
 }
+
+.btnNaranja:hover{
+  background: #F9EDD5;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FE6B4B;
+  font-family: 'Jomolhari';
+  border: solid #F9EDD5;  
+}
+
+.exportar{
+  background: #F9EDD5;
+}
+
+.btnMarino{
+  background: #1F2348;
+  font-size: 22px;
+  color: #C9E265;
+  font-family: 'Jomolhari';
+  border: solid #1F2348;
+  word-wrap: break-word;
+  height: 40px;
+}
+
+.btnMarino:hover{
+  cursor: pointer;
+  color: #FFFFFF !important;
+  background: #03989e;
+  font-weight: bold;
+  border: solid #03989e;
+}

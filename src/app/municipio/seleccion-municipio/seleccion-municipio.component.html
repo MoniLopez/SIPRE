@@ -3,7 +3,7 @@
     <div class="col col-3 desplazar text-center" style="padding: 0px;">
       <h1 class="letraVerde mt-4">MUNICIPIOS</h1>
       <div class="btn-group-vertical col-10">
-        <button  class="btn btn-basic btnNaranja" [class.disabled]="exportar === 0">EXPORTAR</button>
+        <button  class="btn btn-basic btnNaranja" [class.disabled]="exportar === 0" data-bs-toggle="modal" data-bs-target="#modalExportar">EXPORTAR</button>
         <button type="submit" class="btn btn-basic btnMpio mt-2" *ngFor="let municipio of municipios" (click)="seleccion(municipio);">{{municipio}}</button>
       </div>
     </div>
@@ -16,6 +16,27 @@
       </div>
       <div *ngIf="visible == 3" class="row pt-5 text-center">
         <app-estadisticas [nombreMpio]="nombreMpio"></app-estadisticas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Exportar Padron-->
+<div class="modal fade" id="modalExportar" tabindex="-1" aria-labelledby="modalExportar" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content exportar">
+      <div class="modal-header">
+        <h2 class="letraMarino" id="modalExportar"><b>Descargar Padrón Factura</b></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--data-bs-dismiss="modal" cierra el modal-->
+      </div>
+      <div class="modal-body">
+          <h1 class="letraMarino" style="size: 20px;">
+            Se iniciará la descarga de un <b>archivo excel</b> con los valores correspondientes al <b>padrón factura completo</b>. ¿Desea comenzar la descarga?
+          </h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btnMarino" style="color:#5CE1E6" (click)="exportarPadron()">Descargar</button>
+        <button type="submit" class="btnMarino" style="color:#C9E265" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
