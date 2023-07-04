@@ -54,7 +54,10 @@
           </li>
         </ul>
     </nav>
-    <div>
-        <button type="submit" class="btnMarino" style="float: right;" (click)="enviarExportar()">Aceptar</button>
+    <div class="row">
+      <div class="col-11">
+        <button (click)="generarArchivoExcel()">Descargar Excel</button>
+        <button type="submit" class="btnMarino" style="float: right;">Aceptar</button>
+      </div>
     </div>
 </div>
