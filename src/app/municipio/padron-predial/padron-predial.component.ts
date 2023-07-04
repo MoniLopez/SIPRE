@@ -3,6 +3,8 @@ import { Router } from '@angular/router'; //Redigir a otras vistas
 import { Cuentas } from 'src/app/interface/cuentas.interface';
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama servicio que contiene los datos de tasas e incrementos
 
+import * as XLSX from 'xlsx'; //Para generar excel
+
 @Component({
   selector: 'app-padron-predial',
   templateUrl: './padron-predial.component.html',
@@ -14,7 +16,7 @@ export class PadronPredialComponent {
 
   cuentas: Cuentas[] = [];
   
-  elementosPorPagina = 17;
+  elementosPorPagina = 15;
   paginaActual = 1;
   numeroTotalPaginas = 0;
   paginasMostradas = 10; // Número de páginas mostradas en la paginación
@@ -84,18 +86,41 @@ export class PadronPredialComponent {
     this.actualizarPaginasMostradas();
   }
   
+  generarArchivoExcel() {
+    // Crea una nueva instancia de Workbook
+    const wb = XLSX.utils.book_new();
   
+    // Transformar la matriz de objetos en una matriz bidimensional
+    const data = this.cuentas.map(cuenta => [cuenta.noControl, cuenta.NoMpio, cuenta.NoCuenta, cuenta.tipoCuenta,
+      cuenta.superficieTerreno, cuenta.valorTerrenoCalculado, cuenta.superficieConstruccion, cuenta.valorConstruccionCalculado,
+      cuenta.superficieObra, cuenta.valorObra, cuenta.baseGravableCalculada, cuenta.impuestoCalculado]);
+    const wsName = 'Cuentas'; // Nombre de la hoja de trabajo
   
-  exportar:number=0;
-
+    // Convierte los datos en formato de hoja de cálculo de Excel
+    const ws = XLSX.utils.aoa_to_sheet(data);
   
-
-  //Revisar guardar valor en base de datos
-  enviarExportar(){ //Envía valor para poder habilitar el boton Exportar
-    this.exportar = this.exportar+1;
-    this.service.enviarExportar(this.exportar); //Mediante el servio envía los datos
-    console.log(this.exportar);
+    // Agrega la hoja de trabajo al libro de trabajo
+    XLSX.utils.book_append_sheet(wb, ws, wsName);
+  
+    // Genera el archivo Excel
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+  
+    // Crea un Blob con el archivo Excel
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  
+    // Crea un objeto URL para el Blob
+    const url = window.URL.createObjectURL(blob);
+  
+    // Crea un elemento <a> para descargar el archivo
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'cuentas.xlsx'; // Nombre del archivo Excel
+    link.click();
+  
+    // Libera el objeto URL
+    window.URL.revokeObjectURL(url);
   }
+  
 
 
   
