@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama servicio que contiene los datos de tasas e incrementos
 import { Router } from '@angular/router'; //Redigir a otras vistas
 
@@ -12,6 +12,10 @@ export class EstadisticasComponent implements OnInit{
   
   //Recibe datos provenientes del componente seleccion-municipio
   @Input() nombreMpio:string=''; //Recibe el nombre del municipio
+
+  //Enviar valor para que lo use el componente padronPredial
+  /*@Output()
+  eventoEnviarData = new EventEmitter<number>()*/
 
   municipio=''; //Guarda nombre del municipio sin número y sin coma
   numMpio=''; //Almacena numero de municipio
