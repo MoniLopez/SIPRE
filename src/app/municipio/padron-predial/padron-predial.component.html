@@ -1,5 +1,6 @@
-<div class="container-fluid mt-5 col-11">
-    <table class="table align-middle table-bordered contenido text-center mt-5" style="border: #5CE1E6">
+<div class="container-fluid col-12 padronFactura">
+  <h1 class="letraBlanca mt-5">En el municipio <strong>{{municipio}}</strong> se valuaron las siguientes cuentas:</h1>
+    <table class="table align-middle table-bordered contenido text-center mt-3" style="border: #5CE1E6">
         <thead>
             <tr>
                 <th class="letraBlanca" style="font-size: 18px;">NO CONTROL</th>
@@ -33,9 +34,8 @@
             </tr>
         </tbody>
     </table>
-</div>
-<div>
     <nav aria-label="Paginación">
+        <!--<ul class="pagination justify-content-center">-->
         <ul class="pagination justify-content-center">
           <li class="page-item" [class.disabled]="paginaActual === 1">
             <a class="page-link contenido letraVerde" (click)="primeraPagina()">Primera</a>
@@ -52,11 +52,7 @@
           <li class="page-item" *ngIf="paginaActual !== calcularNumeroTotalPaginas()">
             <a class="page-link contenido letraVerde" (click)="ultimaPagina()">Última</a>
           </li>
+          <button type="submit" class="btnMarino mb-3" (click)="terminaPadron()">Aceptar</button>  
         </ul>
-    </nav>
-    <div class="row">
-      <div class="col-11">
-        <button type="submit" class="btnMarino" style="float: right;">Aceptar</button>
-      </div>
-    </div>
+    </nav>      
 </div>

@@ -3,12 +3,11 @@
     <div class="col col-3 desplazar text-center" style="padding: 0px;">
       <h1 class="letraVerde mt-4">MUNICIPIOS</h1>
       <div class="btn-group-vertical col-10">
-        <!--[class.disabled]="exportar === 0-->
         <button  class="btn btn-basic btnNaranja" data-bs-toggle="modal" data-bs-target="#modalExportar">EXPORTAR</button>
         <button type="submit" class="btn btn-basic btnMpio mt-2" *ngFor="let municipio of municipios" (click)="seleccion(municipio);">{{municipio}}</button>
       </div>
     </div>
-    <div class="col">
+    <div class="col d-flex align-items-center justify-content-center">
       <div *ngIf="visible == 1" class="row pt-5 text-center">
         <p class="letraBlanca mt-5" style="font-size: 70px; line-height: 1;">Seleccione el municipio con el que desea comenzar a trabajar.</p>
       </div>

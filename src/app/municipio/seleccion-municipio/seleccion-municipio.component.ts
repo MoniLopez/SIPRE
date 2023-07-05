@@ -4,6 +4,7 @@ import{ AuthService} from '../../service/auth.service'; //Llamar servicio para l
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Contiene los servicios usados en este componente
 import { Cuentas } from 'src/app/interface/cuentas.interface'; //Para uso de la interfaz con la que almacenan los datos recibidos de la API
 import * as XLSX from 'xlsx'; //Para generar archivo excel
+import { ToastrService } from 'ngx-toastr'; //Para usar alertas de Toastr
 
 
 @Component({
@@ -13,7 +14,7 @@ import * as XLSX from 'xlsx'; //Para generar archivo excel
 })
 export class SeleccionMunicipioComponent {
   
-  constructor(private router: Router, private service: AuthService, private service2: DatosMpioService) {
+  constructor(private router: Router, private service: AuthService, private service2: DatosMpioService, private toastr: ToastrService) {
     
   }
 
@@ -31,7 +32,10 @@ export class SeleccionMunicipioComponent {
   municipios=[] //Arreglo para municipios
   auxNombreMpio=''; //Contiene nombre del municipio con número y coma
   nombreMpio='';//Guarda nombre del municipio para enviarlo al componente datos-municipio
-  
+  objetoServicio: any; //Recibe datos del servicio
+  numMpio=''; //Almacena numero de municipio
+  municipio='' //Tiene el nombre del municipio
+
   obtenerMunicipios(){ //Para obtener lista de municipios, se llama al inicia el componente en ngOninit
     this.service.devuelveMpios().subscribe(data => { //Obtiene datos de la API
       this.mpios = data; //Guarda datos de la API en la variable mpios
@@ -41,9 +45,23 @@ export class SeleccionMunicipioComponent {
   }
 
   //Se llama al seleccionar el botón de un municipio
-  seleccion(municipio:string) {
-    this.visible=2; //Cambia valor para mostrar componente hijo (datos-mpio)
-    this.nombreMpio=municipio; //Almacena el nombre del municipio
+  seleccion(mpio:string) {
+    this.nombreMpio=mpio; //Almacena el nombre del municipio
+    var pos = this.nombreMpio.indexOf(','); //Regresa la posición de la coma
+    this.numMpio = this.nombreMpio.substring(0,pos) //Contiene el número de municipio
+    this.municipio = this.nombreMpio.substring(pos+2); //Almacena el nombre del municipio para mostrarlo en el título
+    //Consume servicio para obtener status del municipio
+    this.service2.verificaStatus(this.numMpio, 2024).subscribe(data1 => {
+      this.objetoServicio = data1;
+      var statusMpio = this.objetoServicio[0].toUpperCase();
+      if(statusMpio == 'TERMINADO'){
+        this.toastr.warning('Este municipio ya fue valuado', 'ESTADO: TERMINADO'); 
+        this.router.navigate(['dashboard/municipios/padronPredial', this.numMpio, this.municipio]); //Mueve a la pagina que indica el router
+      }
+      else{
+        this.visible=2; //Cambia valor para mostrar componente hijo (datos-mpio)
+      }
+    })
   }
 
   //Se usa para generar el archivo excel que genera el boton Exportar

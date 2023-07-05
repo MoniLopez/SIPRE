@@ -15,6 +15,7 @@ export class PadronPredialComponent {
   }
 
   numMpio=''; //Contiene número de Municipio con el que se está trabajando
+  municipio=''; //Tiene el nombre del municipio
   cuentas: Cuentas[] = []; //Guarda los datos recibidos de la API de las cuentas valuadas, es de tipo interfaz
   elementosPorPagina = 15; //Cuantas cuentas valudas se mostrarán en la tabla de este componente
   paginaActual = 1; //Para inicio del uso de paginación de la tabla
@@ -24,6 +25,7 @@ export class PadronPredialComponent {
 
   ngOnInit(){
     this.numMpio = String(this.route.snapshot.paramMap.get('numMpio')); //Mediante enrutador con parametros de ruta se recibe el número de municipio
+    this.municipio = String(this.route.snapshot.paramMap.get('municipio')); //Mediante enrutador con parametros de ruta se recibe el nombre del municipio
     this.obtenerDatos(); //Llama a la función obtenerDatos
   }
 
@@ -84,6 +86,12 @@ export class PadronPredialComponent {
   ultimaPagina() { //Se llama al seleccionar la última página
     this.paginaActual = this.calcularNumeroTotalPaginas();
     this.actualizarPaginasMostradas();
+  }
+
+  terminaPadron(){ //Se llama con el botón Acepatar
+    const visible = 1;
+    this.service.enviarVisible(visible); //Mediante el servio envía los datos
+    this.router.navigate(['dashboard/municipios/selecMpio']); //Regresa al inicio
   }
     
 }

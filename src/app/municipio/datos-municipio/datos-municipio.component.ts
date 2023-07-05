@@ -73,7 +73,7 @@ export class DatosMunicipioComponent implements OnChanges{
       this.objetoServicio = data1;
       this.statusMpio = this.objetoServicio[0].toUpperCase();
       //Si el status está en proceso muestra los datos que previamente se ingresaron
-      if (this.statusMpio == 'PROCESO' || this.statusMpio == 'TERMINADO'){
+      if (this.statusMpio == 'PROCESO'){
         //Consume API para mostrar los valores propuestos por el usuario
         this.service.obtenDatos(this.numMpio, 2024).subscribe(data2=>{
           this.objetoServicio = data2; //almacena los objetos que regresa el servicio obtenDatos

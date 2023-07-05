@@ -49,15 +49,16 @@ export class EstadisticasComponent implements OnInit{
   guardaTasasIncrementos(){
     //Consume API para cambio de status
     this.service.terminaValuacion(this.numMpio, 2024).subscribe(data =>{
-    this.objetoServicio=data;
-    this.mensajeValuacion=this.objetoServicio.mensaje});
-    //Condicional para manejo de error al hacer cambio de status
-    if(this.mensajeValuacion == 'ok'){
-      this.router.navigate(['dashboard/municipios/padronPredial', this.numMpio]); //Mueve a la pagina que indica el router
-    }
-    else{
-      this.toastr.warning('No se pudo hacer cambio de status');
-    }
-    
+      this.objetoServicio=data;
+      this.mensajeValuacion=this.objetoServicio.mensaje
+      //Condicional para manejo de error al hacer cambio de status
+      if(this.mensajeValuacion == 'ok'){
+        this.router.navigate(['dashboard/municipios/padronPredial', this.numMpio, this.municipio]); //Mueve a la pagina que indica el router
+      }
+      else{
+        console.log(this.mensajeValuacion);
+        this.toastr.warning('No se pudo hacer cambio de status');
+      }
+    });
   } 
 }
