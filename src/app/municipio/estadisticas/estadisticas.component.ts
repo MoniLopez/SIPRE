@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama servicio que contiene los datos de tasas e incrementos
 import { Router } from '@angular/router'; //Redigir a otras vistas
+import { ToastrService } from 'ngx-toastr'; //Para usar alertas de Toastr
 
 @Component({
   selector: 'app-estadisticas',
@@ -8,14 +9,10 @@ import { Router } from '@angular/router'; //Redigir a otras vistas
   styleUrls: ['./estadisticas.component.css']
 })
 export class EstadisticasComponent implements OnInit{
-  constructor(private service: DatosMpioService, private router: Router){}
+  constructor(private service: DatosMpioService, private router: Router, private toastr: ToastrService){}
   
   //Recibe datos provenientes del componente seleccion-municipio
   @Input() nombreMpio:string=''; //Recibe el nombre del municipio
-
-  //Enviar valor para que lo use el componente padronPredial
-  /*@Output()
-  eventoEnviarData = new EventEmitter<number>()*/
 
   municipio=''; //Guarda nombre del municipio sin número y sin coma
   numMpio=''; //Almacena numero de municipio
@@ -25,7 +22,7 @@ export class EstadisticasComponent implements OnInit{
   objSuburbano: any;//Tiene valores de estadisticas de cuentas rusticas
   objUrbano: any;//Tiene valores de estadisticas de cuentas rusticas
 
-  mensajeValuacion='';
+  mensajeValuacion=''; //Contiene el mensaje recibido por la API
 
   ngOnInit(){
     var pos = this.nombreMpio.indexOf(','); //Regresa la posición de la coma
@@ -35,25 +32,32 @@ export class EstadisticasComponent implements OnInit{
     //Consume API para obtener estadistica
     this.service.generaEstadistica(this.numMpio, 2023).subscribe(data2 =>{
       this.objetoServicio = data2;
-      console.log(this.objetoServicio);
       this.objRustico = this.objetoServicio[0];
       this.objSuburbano= this.objetoServicio[1];
       this.objUrbano = this.objetoServicio[2];
     })
   }
 
-  regresaValuacion(){
+  //Se llama en el botón Revaluar
+  regresaValuacion(){ 
+    //Cambia el valor de visible para ahora mostrar el componente datos-municipio con los datos que llenó el usuario
     const visible = 2;
     this.service.enviarVisible(visible);
   }
 
+  //Se llama al seleccionar el botón Continuar del modalGuardar
   guardaTasasIncrementos(){
     //Consume API para cambio de status
     this.service.terminaValuacion(this.numMpio, 2024).subscribe(data =>{
     this.objetoServicio=data;
     this.mensajeValuacion=this.objetoServicio.mensaje});
-    console.log(this.mensajeValuacion);
-    //Agregar condicional para manejo de error al hacer cambio de status
-    this.router.navigate(['dashboard/municipios/padronPredial']); //Mueve a la pagina que indica el router
+    //Condicional para manejo de error al hacer cambio de status
+    if(this.mensajeValuacion == 'ok'){
+      this.router.navigate(['dashboard/municipios/padronPredial', this.numMpio]); //Mueve a la pagina que indica el router
+    }
+    else{
+      this.toastr.warning('No se pudo hacer cambio de status');
+    }
+    
   } 
 }

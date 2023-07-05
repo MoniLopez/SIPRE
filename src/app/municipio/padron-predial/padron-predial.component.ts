@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'; //Redigir a otras vistas
-import { Cuentas } from 'src/app/interface/cuentas.interface'; //Para uso de la interfaz
+import { Cuentas } from 'src/app/interface/cuentas.interface'; //Para uso de la interfaz con la que almacenan los datos recibidos de la API
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama servicio que contiene los datos de tasas e incrementos
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,35 +11,36 @@ import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama ser
   styleUrls: ['./padron-predial.component.css']
 })
 export class PadronPredialComponent {
-  constructor(private router: Router, private service: DatosMpioService){
+  constructor(private router: Router, private service: DatosMpioService, private route: ActivatedRoute){
   }
 
-  cuentas: Cuentas[] = [];
-  
-  elementosPorPagina = 15;
-  paginaActual = 1;
-  numeroTotalPaginas = 0;
+  numMpio=''; //Contiene número de Municipio con el que se está trabajando
+  cuentas: Cuentas[] = []; //Guarda los datos recibidos de la API de las cuentas valuadas, es de tipo interfaz
+  elementosPorPagina = 15; //Cuantas cuentas valudas se mostrarán en la tabla de este componente
+  paginaActual = 1; //Para inicio del uso de paginación de la tabla
+  numeroTotalPaginas = 0; //Guarda el total de paginas que tendrá la tabla de acuerdos a los datos recibidos de la API
   paginasMostradas = 10; // Número de páginas mostradas en la paginación
   paginas: number[] = []; // Almacena las páginas mostradas en la paginación
 
   ngOnInit(){
-    this.obtenerDatos();
+    this.numMpio = String(this.route.snapshot.paramMap.get('numMpio')); //Mediante enrutador con parametros de ruta se recibe el número de municipio
+    this.obtenerDatos(); //Llama a la función obtenerDatos
   }
 
   //Recibe los datos de las cuentas valuadas del municipio
   obtenerDatos(){
-    this.service.valuacionMunicipio('1',2024).subscribe((data: Object )=>{
-      const padronData = data as Cuentas [];
+    //Consume API enviando numero de municipio y el año en que se está trabajando
+    this.service.valuacionMunicipio(this.numMpio, 2024).subscribe((data: Object )=>{
+      //Al ser demasidas cuentas recibidas con varias propiedades, se hace uno de la interfaz Cuentas
+      const padronData = data as Cuentas []; 
       this.cuentas = padronData;
-      this.actualizarPaginasMostradas();
+      this.actualizarPaginasMostradas(); //Para mostrar desde inicio el rango de paginación
     });
     
   }
- 
-  
+   
   //***Funciones para mostrar paginación adecuada***
-
-  calcularNumeroTotalPaginas(): number {
+  calcularNumeroTotalPaginas(): number { //Genera el total de paginas que se usarán de acuerdo al total de elementos recibidos y el numero de elementos mostrados por página
     return Math.ceil(this.cuentas.length / this.elementosPorPagina);
   }
 
@@ -48,7 +50,6 @@ export class PadronPredialComponent {
     if (inicio < 1) {
       inicio = 1;
     }
-
     let fin = inicio + this.paginasMostradas - 1;
     if (fin > this.numeroTotalPaginas) {
       fin = this.numeroTotalPaginas;
@@ -57,11 +58,10 @@ export class PadronPredialComponent {
         inicio = 1;
       }
     }
-
     this.paginas = Array.from({ length: fin - inicio + 1 }, (_, index) => inicio + index);
   }
 
-  siguientePagina(){
+  siguientePagina(){ //Se llama al hacer cambio de pagina
     if (this.paginaActual < this.calcularNumeroTotalPaginas())
     {
       this.paginaActual++;
@@ -69,19 +69,19 @@ export class PadronPredialComponent {
     }
   }
 
-  anteriorPagina(){
+  anteriorPagina(){ //Se llama al hacer cambio de pagina
     if (this.paginaActual > 1) {
       this.paginaActual--;
       this.actualizarPaginasMostradas();
     }
   }
 
-  primeraPagina(){
+  primeraPagina(){ //Se llama cuando se selecciona la primera página
     this.paginaActual = 1;
     this.actualizarPaginasMostradas();
   }
 
-  ultimaPagina() {
+  ultimaPagina() { //Se llama al seleccionar la última página
     this.paginaActual = this.calcularNumeroTotalPaginas();
     this.actualizarPaginasMostradas();
   }
