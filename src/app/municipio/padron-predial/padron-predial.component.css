@@ -1,3 +1,10 @@
+.padronFactura{
+    background-image: url("../../../assets/panelAzul.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 .contenido {
     background: #1F2348;
 }
@@ -11,6 +18,7 @@
     word-wrap: break-word;
     width: 100px;
     height: 40px;
+    margin-left: 5%;
 }
 
 .btnMarino:hover{
