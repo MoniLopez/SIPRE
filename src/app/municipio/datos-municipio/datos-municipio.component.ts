@@ -1,8 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr'; //Para usar alertas de Toastr
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama servicio que contiene los datos de tasas e incrementos
-import { Router } from '@angular/router'; //Redigir a otras vistas
 
 
 @Component({
@@ -13,7 +12,7 @@ import { Router } from '@angular/router'; //Redigir a otras vistas
 
 export class DatosMunicipioComponent implements OnChanges{
 
-  constructor(private builder: FormBuilder, private toastr: ToastrService, private service: DatosMpioService, private router: Router){
+  constructor(private builder: FormBuilder, private toastr: ToastrService, private service: DatosMpioService){
   }
 
   //Recibe datos provenientes del componente seleccion-municipio
@@ -55,7 +54,7 @@ export class DatosMunicipioComponent implements OnChanges{
   objAuxDatos=[];
   objDatos:any;
 
-  obtenerDatosServicio()
+  obtenerDatosServicio() //Se llama al cargar cambios en el componente en el ngOnChanges
   {
     //Consume servicio para llenar tabla de Tasas e Incrementos
     this.service.obtenDatos(this.numMpio, 2023).subscribe(data =>{
@@ -70,7 +69,7 @@ export class DatosMunicipioComponent implements OnChanges{
     })
 
     //Consume servicio para obtener status del municipio
-    this.service.verificaStatus(this.numMpio, 2023).subscribe(data1 => {
+    this.service.verificaStatus(this.numMpio, 2024).subscribe(data1 => {
       this.objetoServicio = data1;
       this.statusMpio = this.objetoServicio[0].toUpperCase();
       //Si el status está en proceso muestra los datos que previamente se ingresaron
@@ -106,7 +105,7 @@ export class DatosMunicipioComponent implements OnChanges{
           this.tasasIncrementosForm.get('incrementoCantera')?.setValue(this.objIncrementosP.IncrementoCantera);
         })
       }
-      if (this.statusMpio == 'INICIAL'){
+      if (this.statusMpio == 'INICIAL'){ //Deja campo de inputs vacíos
         this.tasasIncrementosForm.get('cuotaMinima')?.setValue('');
         this.tasasIncrementosForm.get('inicial')?.setValue('');
         this.tasasIncrementosForm.get('final')?.setValue('');
@@ -123,13 +122,10 @@ export class DatosMunicipioComponent implements OnChanges{
         this.tasasIncrementosForm.get('incrementoCantera')?.setValue('');
       }
     })
-
   }
-
+  
   //Valida los campos del formulario tasas e incrementos
   tasasIncrementosForm = this.builder.group({
-    //this.tasasIncrementosForm.get('mpio').setValue(this.numMpio),
-    idMunicipio: this.builder.control(1),
     anyo: this.builder.control(2024),
     valorRet: this.builder.control(0),
     cuotaMinima: this.builder.control('', Validators.compose([Validators.required, Validators.min(0)])),
@@ -148,27 +144,24 @@ export class DatosMunicipioComponent implements OnChanges{
     incrementoCantera: this.builder.control('', Validators.compose([Validators.required, Validators.min(1), Validators.max(2)]))
   });
 
+  //Se llama al enviar los campos del formulario con ngSubmit, es decir, al seleccionar el botón Verificar
   verificarDatos(){
-      if (this.tasasIncrementosForm.valid){ //Verificar que el formulario sea válido
+    if (this.tasasIncrementosForm.valid){ //Verificar que el formulario sea válido
+      const datosMpio ={ ... this.tasasIncrementosForm.value, idMunicipio: this.numMpio}; //Agrega valor el valor de idMunicipio junto con los datos del formulario al objeto datosMpio
       //Consume API para iniciar valuación
-      this.service.valuarCuentas(this.tasasIncrementosForm.value).subscribe(data =>{
+      this.service.valuarCuentas(datosMpio).subscribe(data =>{
         this.objetoServicio=data; //Guarda datos recibidos de la API
-        this.mensajeValuacion = this.objetoServicio.mensaje;
-        console.log(this.mensajeValuacion);
+        this.mensajeValuacion = this.objetoServicio.mensaje; //Indica si la valuación se hizo correctamente
+        if (this.mensajeValuacion == "ok"){ 
         //Cambia y envía valor de visible para mostrar componente con las estadisticas
         const visible = 3; 
         this.service.enviarVisible(visible);
-        if (this.mensajeValuacion == "ok"){
-          //Mostrar estadisticas
-          /*const visible = 3; 
-          this.service.enviarVisible(visible);*/
         }
         else{
           this.toastr.error('No se puedo hacer valuación');
         }
       })
     }else{
-      //this.toastr.error('Verifique su información', 'Datos incorrectos'); 
       this.toastr.warning('Todos los campos deben estar llenos con números positivos. Los incrementos deben ser mayor a 1', 'Verificar informacion'); //Estructura: 'Mensaje','Título'
     }
   }

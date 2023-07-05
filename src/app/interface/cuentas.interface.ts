@@ -1,3 +1,4 @@
+//Contiene todos los campos que se reciben al consumir el servicio; TODOS LOS CAMPOS aunque NO se usen todos, de lo contrario marcará error
 export interface Cuentas {
     noControl:                    number;
     Municipio:                    string;
