@@ -5,7 +5,7 @@ import { PadronPredialComponent } from './padron-predial/padron-predial.componen
 
 const routes: Routes = [
   { path: 'selecMpio', component: SeleccionMunicipioComponent },
-  { path: 'padronPredial/:numMpio/:municipio', component: PadronPredialComponent}
+  { path: 'padronPredial/:numMpio/:municipio/:tipo', component: PadronPredialComponent}
 ];
 
 @NgModule({
