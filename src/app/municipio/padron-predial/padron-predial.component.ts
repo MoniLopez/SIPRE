@@ -16,6 +16,7 @@ export class PadronPredialComponent {
 
   numMpio=''; //Contiene número de Municipio con el que se está trabajando
   municipio=''; //Tiene el nombre del municipio
+  tipo=''; //Guarda si el padron a mostrar es el "normal" o el de cuentas fuera de rango
   cuentas: Cuentas[] = []; //Guarda los datos recibidos de la API de las cuentas valuadas, es de tipo interfaz
   elementosPorPagina = 15; //Cuantas cuentas valudas se mostrarán en la tabla de este componente
   paginaActual = 1; //Para inicio del uso de paginación de la tabla
@@ -26,13 +27,31 @@ export class PadronPredialComponent {
   ngOnInit(){
     this.numMpio = String(this.route.snapshot.paramMap.get('numMpio')); //Mediante enrutador con parametros de ruta se recibe el número de municipio
     this.municipio = String(this.route.snapshot.paramMap.get('municipio')); //Mediante enrutador con parametros de ruta se recibe el nombre del municipio
-    this.obtenerDatos(); //Llama a la función obtenerDatos
+    this.tipo = String(this.route.snapshot.paramMap.get('tipo')); //Mediante enrutador con parametros de ruta se recibe el tipo de padron a mostrar
+    if(this.tipo == 'padronFactura'){
+      this.obtenerDatos(); //Llama a la función obtenerDatos
+    }else{
+      this.obtenerCuentasFueraRango(); //Llama a la función obtenerCuentasFueraRango
+    }
+    
   }
 
   //Recibe los datos de las cuentas valuadas del municipio
   obtenerDatos(){
     //Consume API enviando numero de municipio y el año en que se está trabajando
     this.service.valuacionMunicipio(this.numMpio, 2024).subscribe((data: Object )=>{
+      //Al ser demasidas cuentas recibidas con varias propiedades, se hace uno de la interfaz Cuentas
+      const padronData = data as Cuentas []; 
+      this.cuentas = padronData;
+      this.actualizarPaginasMostradas(); //Para mostrar desde inicio el rango de paginación
+    });
+    
+  }
+
+  //Recibe los datos de las cuentas valuadas que están fuera del rango del municipio
+  obtenerCuentasFueraRango(){
+    //Consume API enviando numero de municipio y el año en que se está trabajando
+    this.service.cuentasFueraRango(this.numMpio, 2024).subscribe((data: Object )=>{
       //Al ser demasidas cuentas recibidas con varias propiedades, se hace uno de la interfaz Cuentas
       const padronData = data as Cuentas []; 
       this.cuentas = padronData;
@@ -89,9 +108,17 @@ export class PadronPredialComponent {
   }
 
   terminaPadron(){ //Se llama con el botón Acepatar
-    const visible = 1;
-    this.service.enviarVisible(visible); //Mediante el servio envía los datos
-    this.router.navigate(['dashboard/municipios/selecMpio']); //Regresa al inicio
+    if(this.tipo=='cuentasFueraRango'){
+      console.log("Entra if fueraRango");
+      //Cambia y envía valor de visible para mostrar componente con las estadisticas
+      const visible = 3; 
+      this.service.enviarVisible(visible);
+      this.router.navigate(['dashboard/municipios/selecMpio']); //Regresa al inicio
+    }else{
+      const visible = 1;
+      this.service.enviarVisible(visible); //Mediante el servio envía los datos
+      this.router.navigate(['dashboard/municipios/selecMpio']); //Regresa al inicio
+    }
   }
     
 }

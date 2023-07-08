@@ -27,7 +27,6 @@ export class DatosMunicipioComponent implements OnChanges{
       this.numMpio = this.nombreMpio.substring(0,pos) //Contiene el número de municipio
       this.municipio = this.nombreMpio.substring(pos+2); //Almacena el nombre del municipio para mostrarlo en el título
       this.obtenerDatosServicio(); //Llama a la función que recibe datos de la API
-      
     }
   }
   
@@ -129,7 +128,7 @@ export class DatosMunicipioComponent implements OnChanges{
     anyo: this.builder.control(2024),
     valorRet: this.builder.control(0),
     cuotaMinima: this.builder.control('', Validators.compose([Validators.required, Validators.min(0)])),
-    inicial: this.builder.control('', Validators.compose([Validators.required, Validators.min(1), Validators.max(100)])),
+    inicial: this.builder.control('', Validators.compose([Validators.required, Validators.min(0), Validators.max(100)])),
     final: this.builder.control('', Validators.compose([Validators.required, Validators.min(1), Validators.max(100)])),
     urbanoCons: this.builder.control('', Validators.compose([Validators.required, Validators.min(0), Validators.max(1)])),
     urbanoBaldio: this.builder.control('', Validators.compose([Validators.required, Validators.min(0), Validators.max(1)])),
@@ -140,8 +139,8 @@ export class DatosMunicipioComponent implements OnChanges{
     incrementoUrbano: this.builder.control('', Validators.compose([Validators.required, Validators.min(1), Validators.max(2)])),
     incrementoRustico: this.builder.control('', Validators.compose([Validators.required, Validators.min(1), Validators.max(2)])),
     incrementoConstrucciones: this.builder.control('', Validators.compose([Validators.required, Validators.min(1), Validators.max(2)])),
-    incrementoIndustrial: this.builder.control('', Validators.compose([Validators.required, Validators.min(1), Validators.max(2)])),
-    incrementoCantera: this.builder.control('', Validators.compose([Validators.required, Validators.min(1), Validators.max(2)]))
+    incrementoIndustrial: this.builder.control('', Validators.compose([Validators.required, Validators.min(0), Validators.max(2)])),
+    incrementoCantera: this.builder.control('', Validators.compose([Validators.required, Validators.min(0), Validators.max(2)]))
   });
 
   //Se llama al enviar los campos del formulario con ngSubmit, es decir, al seleccionar el botón Verificar
@@ -158,11 +157,12 @@ export class DatosMunicipioComponent implements OnChanges{
         this.service.enviarVisible(visible);
         }
         else{
-          this.toastr.error('No se puedo hacer valuación');
+          this.toastr.error('No se pudo hacer valuación');
         }
       })
     }else{
       this.toastr.warning('Todos los campos deben estar llenos con números positivos. Los incrementos deben ser mayor a 1', 'Verificar informacion'); //Estructura: 'Mensaje','Título'
     }
   }
+
 }

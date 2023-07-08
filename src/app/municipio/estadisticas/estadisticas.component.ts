@@ -23,6 +23,7 @@ export class EstadisticasComponent implements OnInit{
   objUrbano: any;//Tiene valores de estadisticas de cuentas rusticas
 
   mensajeValuacion=''; //Contiene el mensaje recibido por la API
+  tipo=''; //Indica cuál es el padronPredial que se quiere llamar (cuentas valuadas o cuentas fuera de rango)
 
   ngOnInit(){
     var pos = this.nombreMpio.indexOf(','); //Regresa la posición de la coma
@@ -52,13 +53,21 @@ export class EstadisticasComponent implements OnInit{
       this.objetoServicio=data;
       this.mensajeValuacion=this.objetoServicio.mensaje
       //Condicional para manejo de error al hacer cambio de status
+      this.tipo='padronFactura'
       if(this.mensajeValuacion == 'ok'){
-        this.router.navigate(['dashboard/municipios/padronPredial', this.numMpio, this.municipio]); //Mueve a la pagina que indica el router
+        this.router.navigate(['dashboard/municipios/padronPredial', this.numMpio, this.municipio, this.tipo]); //Mueve a la pagina que indica el router
       }
       else{
         console.log(this.mensajeValuacion);
         this.toastr.warning('No se pudo hacer cambio de status');
       }
     });
-  } 
+  }
+  
+  //Se llama al dar click en Cuenta a revisión
+  cuentasRevision(){
+    //Consume API para recibir cuentas con rango diferente en el incremento
+    this.tipo = 'cuentasFueraRango'
+    this.router.navigate(['dashboard/municipios/padronPredial', this.numMpio, this.municipio, this.tipo]); //Mueve a la pagina que indica el router
+  }
 }
