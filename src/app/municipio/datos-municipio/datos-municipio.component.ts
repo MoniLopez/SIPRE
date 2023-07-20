@@ -152,12 +152,15 @@ export class DatosMunicipioComponent implements OnChanges{
         this.objetoServicio=data; //Guarda datos recibidos de la API
         this.mensajeValuacion = this.objetoServicio.mensaje; //Indica si la valuación se hizo correctamente
         if (this.mensajeValuacion == "ok"){ 
-        //Cambia y envía valor de visible para mostrar componente con las estadisticas
-        const visible = 3; 
-        this.service.enviarVisible(visible);
+          console.log(this.mensajeValuacion);
+          //Cambia y envía valor de visible para mostrar componente con las estadisticas
+          const visible = 3; 
+          this.service.enviarVisible(visible);
+          console.log("entra a verificarDatos");
         }
         else{
           this.toastr.error('No se pudo hacer valuación');
+          console.log(this.mensajeValuacion);
         }
       })
     }else{

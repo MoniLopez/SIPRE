@@ -107,13 +107,13 @@ export class PadronPredialComponent {
     this.actualizarPaginasMostradas();
   }
 
-  terminaPadron(){ //Se llama con el botón Acepatar
+  terminaPadron(){ //Se llama con el botón Aceptar
     if(this.tipo=='cuentasFueraRango'){
       console.log("Entra if fueraRango");
       //Cambia y envía valor de visible para mostrar componente con las estadisticas
-      const visible = 3; 
-      this.service.enviarVisible(visible);
+      this.service.enviarVisible(3);
       this.router.navigate(['dashboard/municipios/selecMpio']); //Regresa al inicio
+      
     }else{
       const visible = 1;
       this.service.enviarVisible(visible); //Mediante el servio envía los datos
