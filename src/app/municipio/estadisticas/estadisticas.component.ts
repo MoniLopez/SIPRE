@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Llama servicio que contiene los datos de tasas e incrementos
 import { Router } from '@angular/router'; //Redigir a otras vistas
 import { ToastrService } from 'ngx-toastr'; //Para usar alertas de Toastr
@@ -31,7 +31,7 @@ export class EstadisticasComponent implements OnInit{
     this.numMpio = this.nombreMpio.substring(0,pos) //Contiene el número de municipio
     
     //Consume API para obtener estadistica
-    this.service.generaEstadistica(this.numMpio, 2023).subscribe(data2 =>{
+    this.service.generaEstadistica(this.numMpio, 2024).subscribe(data2 =>{
       this.objetoServicio = data2;
       this.objRustico = this.objetoServicio[0];
       this.objSuburbano= this.objetoServicio[1];

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import{ AuthService} from '../../service/auth.service'; //Llamar servicio para listado de municipios
 import { DatosMpioService } from '../../service/datos-mpio.service'; //Contiene los servicios usados en este componente
@@ -12,16 +12,14 @@ import { ToastrService } from 'ngx-toastr'; //Para usar alertas de Toastr
   templateUrl: './seleccion-municipio.component.html',
   styleUrls: ['./seleccion-municipio.component.css']
 })
-export class SeleccionMunicipioComponent {
-  
+export class SeleccionMunicipioComponent implements OnInit{
+  visible:number | undefined; //Se usa para mostrar o no algunos componentes
   constructor(private router: Router, private service: AuthService, private service2: DatosMpioService, private toastr: ToastrService) {
-    
   }
 
-  visible:number=0; //Se usa para mostrar o no algunos componentes
-  
   ngOnInit(){
     this.obtenerMunicipios(); //Llama función para mostrar botones con municipios
+    this.visible=1;
     //Al iniciar el componente recibe el valor de visible enviado por otros componente para determinar en el html cuál componente mostrar
     this.service2.visible$.subscribe((valor)=>{
       this.visible = valor; //Captura el valor recibido en la suscripción
@@ -40,7 +38,6 @@ export class SeleccionMunicipioComponent {
     this.service.devuelveMpios().subscribe(data => { //Obtiene datos de la API
       this.mpios = data; //Guarda datos de la API en la variable mpios
       this.municipios=this.mpios.listaDatos; //Almacena listaDatos en el arreglo municipios
-      this.visible = 1; //Indica que se debe mostrar el cmponente padre (seleccion-municipios)
     })
   }
 
