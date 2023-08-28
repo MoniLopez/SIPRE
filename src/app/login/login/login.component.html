@@ -10,10 +10,10 @@
             <div class="col-12">
               <form [formGroup]="loginForm" (ngSubmit)="capturaLogin()">
                 <div class="mb-5 mt-3">
-                  <input class="formLogin letras" type="text" formControlName="usuario" required placeholder="Usuario" />
+                  <input class="formLogin" type="text" formControlName="usuario" required placeholder="Usuario" />
                 </div>
                 <div class="mb-5 mt-5">
-                  <input class="formLogin letras" type="password" formControlName="passwd" required placeholder="Contraseña" />
+                  <input class="formLogin" type="password" formControlName="passwd" required placeholder="Contraseña" />
                 </div>
                 <div class="mb-3 mt-3">
                   <input class="mx-auto d-block btnLogin letras" type="submit" value="Enviar" />
@@ -21,6 +21,7 @@
               </form>
             </div>
           </mat-card-content>
+          <a class="letraNaranja mt-5" href="assets/manualUsuarioSIPRE.pdf" target="_blank">Manual de Usuario</a>
         </mat-card>
       </div>
     </div>
