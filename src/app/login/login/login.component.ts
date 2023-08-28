@@ -44,4 +44,10 @@ export class LoginComponent {
       this.toastr.warning('Faltan campos por llenar');
     }
   }
+
+  descargarPDF(){ //Permite abirir el manual de usuario en otra ventana
+    const rutaPDF = 'assets/manualUsuario.pdf'; //Indica la ruta en la que se encuentra el archivo
+    window.open(rutaPDF, '_blank'); //_blank indica que la URL proporcionada debe abrirse en una nueva pestaña o ventana 
+
+  }
 }
