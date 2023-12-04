@@ -52,7 +52,29 @@
           <li class="page-item" *ngIf="paginaActual !== calcularNumeroTotalPaginas()">
             <a class="page-link contenido letraVerde" (click)="ultimaPagina()">Última</a>
           </li>
-          <button type="submit" class="btnMarino mb-3" (click)="terminaPadron()">Aceptar</button>  
+          <button type="submit" class="btnMarino mb-3" (click)="terminaPadron()">Aceptar</button>
+          <button *ngIf="tipo == 'cuentasFueraRango'" type="submit" class="btnNaranja mb-3"data-bs-toggle="modal" data-bs-target="#modalExportar" >Exportar</button>  
         </ul>
     </nav>      
+</div>
+
+<!-- Modal Exportar Cuentas Fuera de Rango-->
+<div class="modal fade" id="modalExportar" tabindex="-1" aria-labelledby="modalExportar" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content exportar">
+      <div class="modal-header">
+        <h2 class="letraMarino" id="modalExportar"><b>Descargar Cuentas Fuera de Rango</b></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--data-bs-dismiss="modal" cierra el modal-->
+      </div>
+      <div class="modal-body">
+          <h1 class="letraMarino" style="size: 20px;">
+            Se iniciará la descarga de un <b>archivo excel</b> con las cuentas que se encuentran <b>fuera de rango</b>. ¿Desea comenzar la descarga?
+          </h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btnMarino btnMarinoModal" style="color:#5CE1E6" (click)="exportarCuentasRevision()">Descargar</button>
+        <button type="submit" class="btnMarino btnMarinoModal" style="color:#C9E265" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </div>

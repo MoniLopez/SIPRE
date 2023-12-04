@@ -8,14 +8,14 @@ import { Subject } from 'rxjs';
 export class DatosMpioService {
 
   constructor(private http: HttpClient) { }
-  regresaDatosAnterior ='http://192.168.1.147:5042/SimiUnicor/IniciaMunicipios/'
-  obtenerStatusMpio='http://192.168.1.147:5042/SimiUnicor/StatusMunicipios/'
-  limpiarValuar='http://192.168.1.147:5042/SimiUnicor/LmpCalcMunicipios/'
-  estadisticaMpio='http://192.168.1.147:5042/SimiUnicor/ReporteUno/'
-  cambioStatus='http://192.168.1.147:5042/SimiUnicor/FinalizaCalculo/'
-  padronMpio= 'http://192.168.1.147:5042/SimiUnicor/ReporteDos/'
-  padronFactura='http://192.168.1.147:5042/SimiUnicor/ReporteFinal/'
-  fueraRango='http://192.168.1.147:5042/SimiUnicor/ReporteFueraRango/'
+  regresaDatosAnterior ='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/IniciaMunicipios/'
+  obtenerStatusMpio='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/StatusMunicipios/'
+  limpiarValuar='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/LmpCalcMunicipios/'
+  estadisticaMpio='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/ReporteUno/'
+  cambioStatus='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/FinalizaCalculo/'
+  padronMpio= 'https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/ReporteDos/'
+  padronFactura='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/ReporteFinal/'
+  fueraRango='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/ReporteFueraRango/'
   
   //Se usará en los componentes para mostrar o no el componente datos-municipio 
   private visibleServicio = new Subject<number>(); //Utiliza un Subject para enviar y recibir datos

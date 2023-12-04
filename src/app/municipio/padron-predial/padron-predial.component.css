@@ -16,8 +16,8 @@
     font-family: 'Jomolhari';
     border: solid #1F2348;
     word-wrap: break-word;
-    width: 100px;
-    height: 40px;
+    width: 120px;
+    height: 35px;
     margin-left: 5%;
 }
 
@@ -32,3 +32,35 @@
     font-weight: bold;
     color: #FE6B4B;;
 }
+
+.btnNaranja{
+    background: #FE6B4B;
+    font-size: 22px;
+    color: #ffffff;
+    font-family: 'Jomolhari';
+    border: solid #FE6B4B;
+    word-wrap: break-word;
+    width: 110px;
+    height: 35px;
+    margin-left: 5%;
+}
+
+.btnNaranja:hover{
+    cursor: pointer;
+    color: #FE6B4B;
+    background: #F9EDD5;
+    font-weight: bold;
+    border: solid #F9EDD5;
+}
+
+.exportar{
+    background: #F9EDD5;
+}
+
+.btnMarinoModal:hover{
+    cursor: pointer;
+    color: #FFFFFF !important;
+    background: #03989e;
+    font-weight: bold;
+    border: solid #03989e;
+  }
