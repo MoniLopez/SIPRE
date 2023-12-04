@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   constructor(private http: HttpClient) { }
-  apiLogin = 'http://192.168.1.147:8080/api/sparkle/initSesion/'
+  apiLogin = 'https://tramitesenlinea.ircep.gob.mx/ws/generalLogin/api/sparkle/initSesion/'
 
   consumeLogin(usuario: any) {
     return this.http.post(this.apiLogin, usuario);
@@ -21,7 +21,7 @@ export class AuthService {
     return sessionStorage.getItem('perfil') != null ? sessionStorage.getItem('perfil')?.toString() : '';
   }
 
-  apiMunicipios = 'http://192.168.1.147:5042/SimiUnicor/listaMunicipios'
+  apiMunicipios = 'https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/listaMunicipios'
 
   devuelveMpios(){
     return this.http.post(this.apiMunicipios, 1);
