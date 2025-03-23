@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+jimport { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
@@ -8,14 +8,14 @@ import { Subject } from 'rxjs';
 export class DatosMpioService {
 
   constructor(private http: HttpClient) { }
-  regresaDatosAnterior ='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/IniciaMunicipios/'
-  obtenerStatusMpio='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/StatusMunicipios/'
-  limpiarValuar='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/LmpCalcMunicipios/'
-  estadisticaMpio='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/ReporteUno/'
-  cambioStatus='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/FinalizaCalculo/'
-  padronMpio= 'https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/ReporteDos/'
-  padronFactura='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/ReporteFinal/'
-  fueraRango='https://tramitesenlinea.ircep.gob.mx/ws/Simulador/SimiUnicor/ReporteFueraRango/'
+  regresaDatosAnterior ='https://ejemplo.com/api'
+  obtenerStatusMpio='https://ejemplo.com/api'
+  limpiarValuar='https://ejemplo.com/api'
+  estadisticaMpio='https://ejemplo.com/api'
+  cambioStatus='https://ejemplo.com/api'
+  padronMpio= 'https://ejemplo.com/api'
+  padronFactura='https://ejemplo.com/api'
+  fueraRango='https://ejemplo.com/api'
   
   //Se usará en los componentes para mostrar o no el componente datos-municipio 
   private visibleServicio = new Subject<number>(); //Utiliza un Subject para enviar y recibir datos
